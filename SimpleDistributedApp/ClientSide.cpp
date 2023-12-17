@@ -8,28 +8,28 @@ int main() {
     SOCKET clientSocket;
     SOCKADDR_IN client;
 
-    // Инициализация Winsock
+    // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ Winsock
     WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-    // Создание сокета
+    // РЎРѕР·РґР°РЅРёРµ СЃРѕРєРµС‚Р°
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
 
-    // Подключение к серверу
+    // РџРѕРґРєР»СЋС‡РµРЅРёРµ Рє СЃРµСЂРІРµСЂСѓ
     client.sin_family = AF_INET;
     client.sin_addr.s_addr = inet_addr("127.0.0.1");
     client.sin_port = htons(1111);
     connect(clientSocket, (SOCKADDR*)&client, sizeof(client));
-    std::cout << "Подключено к серверу" << std::endl;
+    std::cout << "ГЏГ®Г¤ГЄГ«ГѕГ·ГҐГ­Г® ГЄ Г±ГҐГ°ГўГҐГ°Гі" << std::endl;
 
-    // Отправка и прием сообщений
-    const char* message = "Привет от клиента!";
+    // РћС‚РїСЂР°РІРєР° Рё РїСЂРёРµРј СЃРѕРѕР±С‰РµРЅРёР№
+    const char* message = "ГЏГ°ГЁГўГҐГІ Г®ГІ ГЄГ«ГЁГҐГ­ГІГ !";
     send(clientSocket, message, strlen(message), 0);
 
     char buffer[1024];
     recv(clientSocket, buffer, sizeof(buffer), 0);
-    std::cout << "Получено: " << buffer << std::endl;
+    std::cout << "ГЏГ®Г«ГіГ·ГҐГ­Г®: " << buffer << std::endl;
 
-    // Закрытие сокета
+    // Р—Р°РєСЂС‹С‚РёРµ СЃРѕРєРµС‚Р°
     closesocket(clientSocket);
     WSACleanup();
 
